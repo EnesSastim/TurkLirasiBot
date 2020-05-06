@@ -6,6 +6,14 @@ from telethon import events
 from turklirasi_bot import CURRENCY_API
 from turklirasi_bot.turklirasi_bot import BOT
 
+def isfloat(x):
+    try:
+        float(x)
+    except ValueError:
+        return False
+    else:
+        return True
+
 @BOT.on(events.NewMessage(pattern=r'/kur'))
 async def currency(event):
     bot_reply = await event.reply("__bakıyorum...__")
@@ -31,6 +39,9 @@ async def currency(event):
     currency_to = event.pattern_match.group(2).upper()
     data = get(f"http://data.fixer.io/api/latest?access_key={CURRENCY_API}").json()
     data = data[f'{"rates"}']
+    if not isfloat(amount):
+    	await bot_reply.edit("Kardeşim para yazcan")
+    	return
     if currency_from and currency_to not in data:
     	await bot_reply.edit("Kardeşim bu para birimi bizde yok")
     	return
