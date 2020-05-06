@@ -31,6 +31,9 @@ async def currency(event):
     currency_to = event.pattern_match.group(2).upper()
     data = get(f"http://data.fixer.io/api/latest?access_key={CURRENCY_API}").json()
     data = data[f'{"rates"}']
+    if currency_from and currency_to not in data:
+    	await bot_reply.edit("Kardeşim bu para birimi bizde yok")
+    	return
     if currency_from is "EUR":
     	cto = data[f'{currency_to}']
     	result = float(amount) * float(cto)
