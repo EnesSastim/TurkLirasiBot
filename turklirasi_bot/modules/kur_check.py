@@ -14,9 +14,10 @@ def isfloat(x):
     else:
         return True
 
-@BOT.on(events.NewMessage(pattern=r'/kur'))
+@BOT.on(events.NewMessage(pattern=r'/kur ?(\S*)'))
 async def currency(event):
     bot_reply = await event.reply("__bakıyorum...__")
+    amount = event.pattern_match.group(1)
     euro = get(f"http://data.fixer.io/api/latest?access_key={CURRENCY_API}").json()
     euro = euro[f'{"rates"}']
     turk = euro[f'{"TRY"}']
@@ -26,9 +27,13 @@ async def currency(event):
     pound = 1 / pound
     dolar = turk * dolar
     pound = turk * pound
-    await bot_reply.edit(f"EUR: {turk}\n"
-    f"USD: {'%.8s' % dolar}\n"
-    f"GBP: {'%.8s' % pound}")
+    if isfloat(amount):
+    	turk = turk * float(amount)
+    	dolar = dolar * float(amount)
+    	pound = pound * float(amount)
+    await bot_reply.edit(f"EUR: {turk:.2f}\n"
+    f"USD: {dolar:.2f}\n"
+    f"GBP: {pound:.2f}")
 
 
 @BOT.on(events.NewMessage(pattern=r'/cevir (\S*) ?(\S*) ?(\S*)'))
