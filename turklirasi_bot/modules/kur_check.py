@@ -1,3 +1,4 @@
+
 from requests import get
 
 from telethon import events
@@ -33,16 +34,16 @@ async def currency(event):
     if currency_from is "EUR":
     	cto = data[f'{currency_to}']
     	result = float(amount) * float(cto)
-    	await bot_reply.edit(f"{amount} EUR is:\n`{result} {currency_to}`")
+    	await bot_reply.edit(f"{amount} EUR is:\n`{result:.2f} {currency_to}`")
     elif currency_to is "EUR":
     	cfrom = data[f'{currency_from}']
     	cto = 1 / cfrom
     	result = float(amount) * float(cto)
-    	await bot_reply.edit(f"{amount} {currency_from} is:\n`{result} EUR`")
+    	await bot_reply.edit(f"{amount} {currency_from} is:\n`{result:.2f} EUR`")
     else:
     	cfrom = data[f'{currency_from}']
     	cto = data[f'{currency_to}']
     	result = cfrom / cto
     	result = float(amount) * float(result)
-    	await bot_reply.edit(f"{amount} {currency_to} is:\n`{result} {currency_from}`")
+    	await bot_reply.edit(f"{amount} {currency_to} is:\n`{result:.2f} {currency_from}`")
 
