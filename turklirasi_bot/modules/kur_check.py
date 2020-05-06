@@ -43,14 +43,17 @@ async def currency(event):
     	await bot_reply.edit("Kardeşim para yazcan")
     	return
     if currency_from == "":
-    	await bot_reply.edit("Yazık kafana...")
-    	return
+        await bot_reply.edit("Yazık kafana...")
+        return
     if currency_to == "":
-    	await bot_reply.edit("Yazık kafana...")
-    	return
-    if currency_from and currency_to not in data:
-    	await bot_reply.edit("Kardeşim bu para birimi bizde yok")
-    	return
+        await bot_reply.edit("Yazık kafana...")
+        return
+    if currency_from not in data:
+        await bot_reply.edit("Kardeşim bu para birimi bizde yok")
+        return
+    if currency_to not in data:
+        await bot_reply.edit("Kardeşim bu para birimi bizde yok")
+        return
     if currency_from is "EUR":
     	cto = data[f'{currency_to}']
     	result = float(amount) * float(cto)
