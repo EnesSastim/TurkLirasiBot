@@ -42,6 +42,12 @@ async def currency(event):
     if not isfloat(amount):
     	await bot_reply.edit("Kardeşim para yazcan")
     	return
+    if currency_from == "":
+    	await bot_reply.edit("Yazık kafana...")
+    	return
+    if currency_to == "":
+    	await bot_reply.edit("Yazık kafana...")
+    	return
     if currency_from and currency_to not in data:
     	await bot_reply.edit("Kardeşim bu para birimi bizde yok")
     	return
