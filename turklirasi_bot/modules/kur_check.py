@@ -23,10 +23,8 @@ async def currency(event):
     turk = euro[f'{"TRY"}']
     dolar = euro[f'{"USD"}']
     pound = euro[f'{"GBP"}']
-    dolar = 1 / dolar
-    pound = 1 / pound
-    dolar = turk * dolar
-    pound = turk * pound
+    dolar = turk / dolar
+    pound = turk / pound
     if isfloat(amount):
     	turk = turk * float(amount)
     	dolar = dolar * float(amount)
