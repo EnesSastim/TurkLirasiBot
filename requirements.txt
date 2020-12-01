@@ -1,4 +1,6 @@
 asyncssh
+bs4
+lxml
 requests
 humanize
 # Telethon Dependecies
